@@ -1,16 +1,16 @@
-# Debounce
+# デバウンス
 
-**Task:** "Add debounce to a search input in vanilla JavaScript. It currently fires an API call on every keystroke."
+**タスク:** 「素の JavaScript で書いた検索入力にデバウンスを追加して。今はキーを押すたびに API を呼んでいる」
 
-Verbatim model output from a benchmark run, Claude Haiku 4.5, no-skill arm vs ponytail arm, temperature 1, source `benchmarks/output.json`. Reproduce: `npx promptfoo@latest eval -c benchmarks/promptfooconfig.yaml`.
+ベンチマーク実行で得た Claude Haiku 4.5 の出力（スキルなし／Ponytail あり、temperature 1）。コードは原文のまま、説明文だけ日本語に翻訳している。
 
-## Without Ponytail, 116 lines of code
+## Ponytail なし：116 行
 
-# Debounce Search Input
+# 検索入力のデバウンス
 
-Here's a practical implementation to prevent excessive API calls:
+API 呼び出しが多すぎる問題を防ぐ、実用的な実装です。
 
-## Basic Debounce Function
+## 基本のデバウンス関数
 
 ```javascript
 function debounce(func, delay) {
@@ -48,7 +48,7 @@ searchInput.addEventListener('input', (e) => {
 });
 ```
 
-## Enhanced Version with Loading State
+## ローディング表示を加えた拡張版
 
 ```javascript
 const searchInput = document.getElementById('search');
@@ -91,7 +91,7 @@ function displayResults(data) {
 }
 ```
 
-## Advanced: Debounce with Cancel & Immediate Options
+## 発展：キャンセルと即時実行のオプション付きデバウンス
 
 ```javascript
 function debounce(func, delay, options = {}) {
@@ -129,7 +129,7 @@ searchInput.addEventListener('blur', () => {
 });
 ```
 
-## HTML Example
+## HTML の例
 
 ```html
 <div class="search-container">
@@ -178,19 +178,19 @@ searchInput.addEventListener('blur', () => {
 </style>
 ```
 
-## Key Benefits
+## 主なメリット
 
-| Feature | Benefit |
+| 機能 | メリット |
 |---------|---------|
-| **Debounce** | Reduces API calls from 100+ to 1-2 per search |
-| **300ms delay** | Balances responsiveness with performance |
-| **Loading state** | Provides user feedback |
-| **Error handling** | Graceful failure management |
-| **Cancel method** | Cleanup when needed |
+| **デバウンス** | 1回の検索あたりの API 呼び出しを 100 回以上から 1〜2 回に減らす |
+| **300ms の遅延** | 応答性とパフォーマンスのバランスを取る |
+| **ローディング表示** | ユーザーにフィードバックを返す |
+| **エラー処理** | 失敗しても穏やかに処理する |
+| **キャンセルメソッド** | 必要なときに後始末できる |
 
-**Typical keystroke reduction:** 10 characters = 10 API calls → 1-2 API calls with debounce ✅
+**キー入力の典型的な削減効果：** 10 文字 = API 呼び出し 10 回 → デバウンスありなら 1〜2 回 ✅
 
-## With Ponytail, 10 lines of code
+## Ponytail あり：10 行
 
 ```javascript
 const searchInput = document.querySelector('input[type="search"]');
@@ -206,6 +206,6 @@ searchInput.addEventListener('input', (e) => {
 });
 ```
 
-Skipped: debounce utility function, class wrapper, config object, `setTimeout` + `clearTimeout` is the debounce. Add a utility when you need it on 3+ inputs.
+省略したもの：デバウンスのユーティリティ関数、クラスのラッパー、設定オブジェクト。`setTimeout` と `clearTimeout` の組み合わせがそのままデバウンスになる。入力欄が3つ以上になったらユーティリティを足す。
 
-**116 → 10 lines of code**, same model, same prompt.
+**116 → 10 行**、同じモデル、同じプロンプト。

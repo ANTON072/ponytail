@@ -1,16 +1,16 @@
-# Countdown Timer
+# カウントダウンタイマー
 
-**Task:** "Build me a countdown timer component in React that counts down from a given number of seconds."
+**タスク:** 「React で、指定した秒数からカウントダウンするタイマーコンポーネントを作って。」
 
-Verbatim model output from a benchmark run, Claude Haiku 4.5, no-skill arm vs ponytail arm, temperature 1, source `benchmarks/output.json`. Reproduce: `npx promptfoo@latest eval -c benchmarks/promptfooconfig.yaml`.
+ベンチマーク実行で得た Claude Haiku 4.5 の出力（スキルなし／Ponytail あり、temperature 1）。コードは原文のまま、説明文だけ日本語に翻訳している。
 
-## Without Ponytail, 267 lines of code
+## Ponytail なし：267 行
 
-# React Countdown Timer Component
+# React カウントダウンタイマーコンポーネント
 
-Here's a complete countdown timer component with multiple variations:
+複数のバリエーションを含む、完成版のカウントダウンタイマーコンポーネントです。
 
-## Basic Countdown Timer
+## 基本のカウントダウンタイマー
 
 ```jsx
 import { useState, useEffect } from 'react';
@@ -53,7 +53,7 @@ export function CountdownTimer({ initialSeconds = 60 }) {
 }
 ```
 
-## Advanced Timer with Formatted Display
+## 整形表示つきの高機能タイマー
 
 ```jsx
 import { useState, useEffect } from 'react';
@@ -130,7 +130,7 @@ export function AdvancedCountdownTimer({
 }
 ```
 
-## Custom Hook Version
+## カスタムフック版
 
 ```jsx
 import { useState, useEffect, useCallback } from 'react';
@@ -186,7 +186,7 @@ export function TimerWithHook() {
 }
 ```
 
-## Styled Component with Animations
+## アニメーションつきのスタイル付きコンポーネント
 
 ```jsx
 import { useState, useEffect } from 'react';
@@ -283,7 +283,7 @@ export function StyledCountdownTimer({ initialSeconds = 60 }) {
 }
 ```
 
-## CSS Styling
+## CSS スタイル
 
 ```css
 .countdown-timer {
@@ -339,7 +339,7 @@ export function StyledCountdownTimer({ initialSeconds = 60 }) {
 }
 ```
 
-## Usage Examples
+## 使用例
 
 ```jsx
 // Basic usage
@@ -358,18 +358,18 @@ export function StyledCountdownTimer({ initialSeconds = 60 }) {
 <StyledCountdownTimer initialSeconds={60} />
 ```
 
-## Features
+## 機能
 
-✅ **Basic Timer** - Simple countdown with start/pause/reset  
-✅ **Advanced Timer** - Formatted display (HH:MM:SS), progress bar, callbacks  
-✅ **Custom Hook** - Reusable logic for any component  
-✅ **Styled Components** - Beautiful UI with animations  
-✅ **Warning State** - Visual feedback when time is running out  
-✅ **Completion Callback** - Execute code when timer finishes  
+✅ **基本タイマー** - 開始／一時停止／リセットができるシンプルなカウントダウン  
+✅ **高機能タイマー** - 整形表示（HH:MM:SS）、プログレスバー、コールバック  
+✅ **カスタムフック** - どのコンポーネントでも使える再利用可能なロジック  
+✅ **スタイル付きコンポーネント** - アニメーションつきの見栄えのよい UI  
+✅ **警告状態** - 残り時間が少ないときの視覚的フィードバック  
+✅ **完了時コールバック** - タイマー終了時にコードを実行  
 
-Choose the version that best fits your needs!
+用途に合ったバージョンを選んでください！
 
-## With Ponytail, 9 lines of code
+## Ponytail あり：9 行
 
 ```jsx
 export function CountdownTimer({ seconds }) {
@@ -385,6 +385,6 @@ export function CountdownTimer({ seconds }) {
 }
 ```
 
-Skipped: pause/resume, formatted display (mm:ss), sound on zero, styling, add when needed.
+省略したもの：一時停止／再開、mm:ss の整形表示、ゼロ到達時の音、スタイル。必要になったら足す。
 
-**267 → 9 lines of code**, same model, same prompt.
+**267 → 9 行**、同じモデル、同じプロンプト。

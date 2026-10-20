@@ -1,14 +1,14 @@
-# Email Validation
+# メールアドレスの検証
 
-**Task:** "Write me a Python function that validates email addresses."
+**タスク:** 「メールアドレスを検証する Python の関数を書いて」
 
-Verbatim model output from a benchmark run, Claude Haiku 4.5, no-skill arm vs ponytail arm, temperature 1, source `benchmarks/output.json`. Reproduce: `npx promptfoo@latest eval -c benchmarks/promptfooconfig.yaml`.
+ベンチマーク実行で得た Claude Haiku 4.5 の出力（スキルなし／Ponytail あり、temperature 1）。コードは原文のまま、説明文だけ日本語に翻訳している。
 
-## Without Ponytail, 75 lines of code
+## Ponytail なし：75 行
 
-# Email Validation Function
+# メールアドレス検証関数
 
-Here's a practical Python function that validates email addresses:
+メールアドレスを検証する、実用的な Python 関数です。
 
 ```python
 import re
@@ -47,7 +47,7 @@ if __name__ == "__main__":
         print(f"{email:<30} -> {result}")
 ```
 
-## More Robust Version (with additional checks)
+## より堅牢なバージョン（追加のチェック付き）
 
 ```python
 import re
@@ -106,7 +106,7 @@ if __name__ == "__main__":
         print(f"{email:<35} -> {is_valid:5} ({message})")
 ```
 
-## Using a Third-Party Library (Recommended for Production)
+## サードパーティのライブラリを使う（本番環境向けにおすすめ）
 
 ```python
 from email_validator import validate_email, EmailNotValidError
@@ -132,17 +132,17 @@ if __name__ == "__main__":
     print(validate_email_production("invalid@"))          # False
 ```
 
-## Comparison
+## 比較
 
-| Method | Pros | Cons |
+| 方法 | 長所 | 短所 |
 |--------|------|------|
-| **Regex (Simple)** | Fast, no dependencies | Limited validation |
-| **Regex (Advanced)** | More thorough | Still not RFC-compliant |
-| **email-validator** | RFC-compliant, reliable | External dependency |
+| **正規表現（シンプル）** | 速い、依存なし | 検証が限定的 |
+| **正規表現（発展）** | より徹底している | それでも RFC には準拠しない |
+| **email-validator** | RFC に準拠、信頼できる | 外部への依存が増える |
 
-**Recommendation**: Use the `email-validator` library for production applications, as it properly handles RFC 5321/5322 standards. Use the simple regex version for quick scripts or when you want to avoid dependencies.
+**おすすめ**：本番のアプリケーションでは `email-validator` ライブラリを使ってください。RFC 5321/5322 の規格を正しく扱えます。手軽なスクリプトや、依存を避けたい場合は、シンプルな正規表現版を使ってください。
 
-## With Ponytail, 3 lines of code
+## Ponytail あり：3 行
 
 ```python
 import re
@@ -151,6 +151,6 @@ def is_valid_email(email: str) -> bool:
     return bool(re.match(r'^[^@]+@[^@]+\.[^@]+$', email))
 ```
 
-Skipped: RFC 5322 parser, DNS MX lookup, confirmation email. Add when you actually need to reject `user+tag@sub.domain.co.uk` or catch typos, until then, this catches 99% of "oops I fat-fingered it" cases.
+省略したもの：RFC 5322 のパーサー、DNS の MX 検索、確認メール。`user+tag@sub.domain.co.uk` を弾く必要が出たとき、またはタイプミスを拾いたくなったときに足す。それまでは、この1行で「うっかり打ち間違えた」ケースの 99% は拾える。
 
-**75 → 3 lines of code**, same model, same prompt.
+**75 → 3 行**、同じモデル、同じプロンプト。

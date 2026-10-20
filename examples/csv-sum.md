@@ -1,12 +1,12 @@
-# CSV Sum
+# CSV の合計
 
-**Task:** "Write Python code that reads sales.csv and sums the 'amount' column."
+**タスク:** 「sales.csv を読み込み、'amount' 列を合計する Python コードを書いて」
 
-Verbatim model output from a benchmark run, Claude Haiku 4.5, no-skill arm vs ponytail arm, temperature 1, source `benchmarks/output.json`. Reproduce: `npx promptfoo@latest eval -c benchmarks/promptfooconfig.yaml`.
+ベンチマーク実行で得た Claude Haiku 4.5 の出力（スキルなし／Ponytail あり、temperature 1）。コードは原文のまま、説明文だけ日本語に翻訳している。
 
-## Without Ponytail, 20 lines of code
+## Ponytail なし：20 行
 
-# Python code to read sales.csv and sum the 'amount' column
+# sales.csv を読み込み、'amount' 列を合計する Python コード
 
 ```python
 import pandas as pd
@@ -21,9 +21,9 @@ total_amount = df['amount'].sum()
 print(f"Total amount: ${total_amount:,.2f}")
 ```
 
-## Alternative methods:
+## 別の方法：
 
-**Using CSV module (without pandas):**
+**CSV モジュールを使う（pandas なし）：**
 ```python
 import csv
 
@@ -37,7 +37,7 @@ with open('sales.csv', 'r') as file:
 print(f"Total amount: ${total_amount:,.2f}")
 ```
 
-**Using pandas with error handling:**
+**pandas とエラー処理を使う：**
 ```python
 import pandas as pd
 
@@ -51,13 +51,13 @@ except KeyError:
     print("Error: 'amount' column not found")
 ```
 
-**The pandas method is recommended** because it's:
-- More concise and readable
-- Handles data types automatically
-- Provides built-in error handling
-- Efficient for large files
+**pandas を使う方法をおすすめします**。理由は次のとおりです。
+- より簡潔で読みやすい
+- データ型を自動で扱ってくれる
+- エラー処理が組み込まれている
+- 大きなファイルでも効率が良い
 
-## With Ponytail, 3 lines of code
+## Ponytail あり：3 行
 
 ```python
 import csv
@@ -66,6 +66,6 @@ total = sum(float(row['amount']) for row in csv.DictReader(open('sales.csv')))
 print(total)
 ```
 
-Skipped: pandas, error handling, file closing, add when the CSV is large, malformed, or you need more analysis.
+省略したもの：pandas、エラー処理、ファイルのクローズ。CSV が大きい、形式が崩れている、またはさらに分析が必要になったら足す。
 
-**20 → 3 lines of code**, same model, same prompt.
+**20 → 3 行**、同じモデル、同じプロンプト。

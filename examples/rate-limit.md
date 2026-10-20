@@ -1,16 +1,16 @@
-# Rate Limiting
+# レート制限
 
-**Task:** "Add rate limiting to my FastAPI endpoint so users can't spam it."
+**タスク:** 「FastAPI のエンドポイントにレート制限を付けて、ユーザーが連打できないようにして。」
 
-Verbatim model output from a benchmark run, Claude Haiku 4.5, no-skill arm vs ponytail arm, temperature 1, source `benchmarks/output.json`. Reproduce: `npx promptfoo@latest eval -c benchmarks/promptfooconfig.yaml`.
+ベンチマーク実行で得た Claude Haiku 4.5 の出力（スキルなし／Ponytail あり、temperature 1）。コードは原文のまま、説明文だけ日本語に翻訳している。
 
-## Without Ponytail, 128 lines of code
+## Ponytail なし：128 行
 
-# Rate Limiting in FastAPI
+# FastAPI のレート制限
 
-Here are several approaches, from simplest to most robust:
+最も簡単なものから最も堅牢なものまで、いくつかの方法を紹介します。
 
-## 1. **Using `slowapi` (Recommended - Easiest)**
+## 1. **`slowapi` を使う（推奨・最も簡単）**
 
 ```bash
 pip install slowapi
@@ -38,14 +38,14 @@ async def get_data(request: Request):
     return {"message": "Success"}
 ```
 
-**Rate limit formats:**
-- `"5/minute"` - 5 requests per minute
-- `"100/hour"` - 100 requests per hour
-- `"1000/day"` - 1000 requests per day
+**レート制限の書式:**
+- `"5/minute"` - 1 分あたり 5 リクエスト
+- `"100/hour"` - 1 時間あたり 100 リクエスト
+- `"1000/day"` - 1 日あたり 1000 リクエスト
 
 ---
 
-## 2. **Using `limits` Library (More Control)**
+## 2. **`limits` ライブラリを使う（より細かく制御）**
 
 ```bash
 pip install limits
@@ -75,7 +75,7 @@ async def get_data(request: Request):
 
 ---
 
-## 3. **Custom Middleware (Full Control)**
+## 3. **カスタムミドルウェア（完全に制御）**
 
 ```python
 from fastapi import FastAPI, HTTPException, Request
@@ -120,7 +120,7 @@ async def get_data():
 
 ---
 
-## 4. **Per-User Rate Limiting (With Authentication)**
+## 4. **ユーザー単位のレート制限（認証あり）**
 
 ```python
 from fastapi import FastAPI, Depends, HTTPException
@@ -142,7 +142,7 @@ async def get_data(request: Request, user_id: str = Depends(get_user_id)):
 
 ---
 
-## 5. **Redis-Based Rate Limiting (Production)**
+## 5. **Redis ベースのレート制限（本番向け）**
 
 ```bash
 pip install slowapi redis
@@ -180,7 +180,7 @@ async def get_data(request: Request):
 
 ---
 
-## 6. **Complete Example with Multiple Endpoints**
+## 6. **複数エンドポイントの完全な例**
 
 ```python
 from fastapi import FastAPI, Request
@@ -224,18 +224,18 @@ async def get_public(request: Request):
 
 ---
 
-## Comparison Table
+## 比較表
 
-| Method | Pros | Cons | Best For |
+| 方法 | 長所 | 短所 | 向いている用途 |
 |--------|------|------|----------|
-| **slowapi** | Easy, decorator-based | In-memory only | Development, small apps |
-| **limits** | Flexible, multiple backends | More setup | Custom logic |
-| **Middleware** | Full control, no dependencies | Manual cleanup | Learning, simple cases |
-| **Redis** | Distributed, scalable | Requires Redis | Production, multi-server |
+| **slowapi** | 簡単、デコレータ式 | インメモリのみ | 開発、小規模アプリ |
+| **limits** | 柔軟、複数バックエンド | 設定が増える | 独自ロジック |
+| **ミドルウェア** | 完全に制御でき、依存なし | 手動のクリーンアップが必要 | 学習、単純なケース |
+| **Redis** | 分散、スケーラブル | Redis が必要 | 本番、複数サーバー |
 
 ---
 
-## Testing Rate Limits
+## レート制限のテスト
 
 ```python
 import httpx
@@ -248,9 +248,9 @@ async def test_rate_limit():
             # First 5 should be 200, 6th should be 429
 ```
 
-**Recommendation:** Use `slowapi` for most cases, it's the most popular and easiest to implement! 🚀
+**おすすめ:** ほとんどの場合は `slowapi` を使いましょう。最も普及していて、導入も最も簡単です！🚀
 
-## With Ponytail, 10 lines of code
+## Ponytail あり：10 行
 
 ```python
 from fastapi import FastAPI, HTTPException
@@ -267,6 +267,6 @@ async def my_endpoint(request):
     return {"status": "ok"}
 ```
 
-Skipped: custom rate limit logic, Redis, sliding windows, `slowapi` handles it. Add when: you need distributed rate limiting across multiple servers (swap `Limiter` for Redis backend) or per-user limits (add `key_func=lambda r: r.headers.get("authorization")`).
+省略したもの：独自のレート制限ロジック、Redis、スライディングウィンドウ（`slowapi` が処理する）。足すとき：複数サーバーにまたがる分散レート制限が必要になったら（`Limiter` を Redis バックエンドに差し替える）、またはユーザー単位の制限が必要になったら（`key_func=lambda r: r.headers.get("authorization")` を追加）。
 
-**128 → 10 lines of code**, same model, same prompt.
+**128 → 10 行**、同じモデル、同じプロンプト。

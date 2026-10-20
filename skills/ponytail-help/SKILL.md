@@ -31,20 +31,10 @@ Level sticks until changed or session end.
 | **ponytail-gain** | `/ponytail-gain` | Measured-impact scoreboard: less code, less cost, more speed. |
 | **ponytail-help** | `/ponytail-help` | This card. |
 
-In Codex CLI and the IDE extension, invoke skills with `$ponytail:ponytail`,
-`$ponytail:ponytail-review`, or `$ponytail:ponytail-help`. Claude Code and OpenCode use the
-slash-command forms above (OpenCode ships all six as slash commands).
-
 ## Deactivate
 
 Say "stop ponytail" or "normal mode". Resume anytime with `/ponytail`.
 `/ponytail off` also works.
-
-## Band (Claude Code)
-
-`/ponytail band` hides the band above the prompt, the same command brings it back.
-`/ponytail band on` and `/ponytail band off` set it directly. The level stays.
-`/ponytail band import` adds your past Claude Code sessions (cost, agent time, tokens) to the board.
 
 ## Configure Default Mode
 
@@ -63,13 +53,13 @@ export PONYTAIL_DEFAULT_MODE=ultra
 Set `"off"` to disable auto-activation on session start, activate manually
 with `/ponytail` when wanted.
 
-Resolution: env var > config file > `full`.
+Resolution: env var > config file > `full`. The level is written into
+`~/.claude/CLAUDE.md`, so re-run `node scripts/claude-skills.js install` in the
+ponytail checkout after changing it.
 
 ## Update
 
-Enable auto-update once: open `/plugin`, go to Marketplaces, pick ponytail, Enable auto-update. Claude Code then pulls new versions at startup (run `/reload-plugins` when it prompts). Manual refresh: `/plugin marketplace update ponytail` then `/reload-plugins`.
-
-If `/plugin` is not recognized, your Claude Code is out of date. Update it (`npm install -g @anthropic-ai/claude-code@latest`, or `brew upgrade claude-code`) and restart. Other hosts use their own update flow.
+`git pull` in the ponytail checkout, then re-run `node scripts/claude-skills.js install`.
 
 ## More
 
