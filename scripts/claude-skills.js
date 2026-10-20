@@ -11,8 +11,8 @@
 
 const fs = require('fs');
 const path = require('path');
-const { getClaudeDir, getDefaultMode } = require('../hooks/ponytail-config');
-const { getPonytailInstructions } = require('../hooks/ponytail-instructions');
+const { getClaudeDir, getDefaultMode } = require('./ponytail-config');
+const { getPonytailInstructions } = require('./ponytail-instructions');
 
 const SKILLS = path.join(__dirname, '..', 'skills');
 const BEGIN = '<!-- ponytail:begin (written by scripts/claude-skills.js; edits here are overwritten) -->';
